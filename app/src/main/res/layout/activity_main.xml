@@ -137,30 +137,28 @@
         android:id="@+id/phoneList"
         android:text="Get Phone List"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+
 
         <Button
 
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
             android:id="@+id/countButton"
             android:text="Count"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:textColor="#900"
             android:id="@+id/count"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:textSize="20sp"/>
 
 
-    </LinearLayout>
 
 
 

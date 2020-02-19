@@ -159,7 +159,7 @@ public class PersonActivity extends AppCompatActivity {
 //                ArrayList<Person> results = new ArrayList<>();
 //
 //                for (Person p1 : persons) {
-//                    if (p1.firstName.contains(newText)) {
+//                    if (p1.getFirstName().contains(newText)) {
 //                        results.add(p1);
 //                    }
 //
