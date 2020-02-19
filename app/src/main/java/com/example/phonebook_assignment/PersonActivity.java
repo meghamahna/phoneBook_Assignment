@@ -7,8 +7,11 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -25,8 +28,9 @@ public class PersonActivity extends AppCompatActivity {
     DatabaseHelper mDataBase;
 
     List<Person> persons;
+    List<Person> searchList = new ArrayList<>();
     SwipeMenuListView listView;
-
+    EditText searchText;
     PersonAdapter personAdapter;
 
     @Override
@@ -36,9 +40,51 @@ public class PersonActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.listView);
         persons = new ArrayList<>();
-
+        searchText = findViewById(R.id.searchText);
         mDataBase = new DatabaseHelper(this);
         loadPersons();
+
+        searchText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                String searchText = s.toString();
+                searchList.clear();
+                if(!searchText.isEmpty()){
+
+                    for (Person person:persons) {
+                        if(person.getFirstName().contains(searchText)){
+                            searchList.add(person);
+                        }
+                    }
+                } else{
+                    searchList.addAll(persons);
+
+                }
+
+                personAdapter = new PersonAdapter(PersonActivity.this , R.layout.list_layout , searchList , mDataBase);
+                listView.setAdapter(personAdapter);
+
+
+
+            }
+
+
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+
+
+
+            }
+        });
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
             @Override
@@ -140,37 +186,6 @@ public class PersonActivity extends AppCompatActivity {
 
         }
     }
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.search_menu, menu);
-//        MenuItem menuItem = menu.findItem(R.id.search);
-//        SearchView searchView = (SearchView) menuItem.getActionView();
-//
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//
-//                ArrayList<Person> results = new ArrayList<>();
-//
-//                for (Person p1 : persons) {
-//                    if (p1.getFirstName().contains(newText)) {
-//                        results.add(p1);
-//                    }
-//
-//                    ( (PersonAdapter)listView.getAdapter()).update(results);
-//                }
-//
-//
-//                return false;
-//            }
-//        });
-//
-//        return super.onCreateOptionsMenu(menu);
-//    }
+
+
 }

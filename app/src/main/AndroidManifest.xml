@@ -12,6 +12,8 @@
         <activity android:name=".PersonActivity"></activity>
         <activity android:name=".MainActivity"
             android:windowSoftInputMode="stateHidden|adjustResize">
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
